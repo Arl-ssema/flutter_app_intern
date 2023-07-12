@@ -1,115 +1,169 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/form.dart';
+// import 'package:flutter_application_1/form.dart';
+// import 'package:flutter_application_1/text.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(home: Signin()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class Signin extends StatefulWidget {
+  const Signin({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Signin> createState() => _SigninState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _SigninState extends State<Signin> {
+  // TextEditingController emailCtrl = TextEditingController();
+  TextEditingController pwdController = TextEditingController();
+  TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        // appBar: AppBar(
+        //   backgroundColor: Colors.blue,
+        // ),
+
+        backgroundColor: Color.fromARGB(255, 236, 246, 248),
+        body: SingleChildScrollView(
+          child: Padding(
+              padding: EdgeInsets.fromLTRB(30.0, 90.0, 30.0, 0),
+              child: Column(
+                children: <Widget>[
+                  const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              'https://www.shutterstock.com/image-vector/vector-car-parts-tire-isolated-600w-1962329059.jpg'),
+                          radius: 40.0,
+                        ),
+                        Text(
+                          'Fixer Upper',
+                          style: TextStyle(
+                            letterSpacing: 2.0,
+                            fontSize: 30.0,
+                            color: Colors.blueGrey,
+                          ),
+                        )
+                      ]),
+                  // const Divider(height: 10.0, color: Colors.black),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: const Text(
+                            'Email:',
+                            style: TextStyle(
+                                color: Colors.black, letterSpacing: 2.0),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: TextField(
+                            controller: textController,
+                            // validator: (value) {
+                            //   if(value == null || value.isEmpty){
+                            //     return 'Please enter some text';
+                            //   }
+                            //   if(!value.contains('@')){
+                            //     return 'This is not a valid email';
+                            //   }
+                            //   if(!value.contains('.com')){
+                            //     return 'This is not a valid email';
+                            //   }
+                            // },
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ]),
+                  const SizedBox(height: 30.0),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Password:',
+                            style: TextStyle(
+                                color: Colors.black, letterSpacing: 2.0),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: TextField(
+                            controller: pwdController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ]),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Register(child: Column())),
+                      );
+                    },
+                    child: Container(
+                      color: Colors.blueAccent,
+                      padding:
+                          const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: Colors.white, fontSize: 13.0),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text('Do not have an account?',
+                          style: TextStyle(color: Colors.blue)),
+                      TextButton(
+                        onPressed: () { },
+                        child: Container(
+                          color: Colors.blueAccent,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 10),
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(color: Colors.white, fontSize: 13.0),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              )),
+        ));
   }
 }
+           
+// title: Row ()Text(widget.title)
+// onPressed: _incrementCounter,
+// tooltip: 'Increment',
+// Card(
+//   backgroundColor: Colors.amber
+// ),
+// child: Column(
+//   mainAxisAlignment: MainAxisAlignment.spaceAround,
+//   crossAxisAlignment: CrossAxisAlignment.stretch,
+//   
+// ),
